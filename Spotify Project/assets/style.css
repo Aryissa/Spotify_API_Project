@@ -1,0 +1,112 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #333;
+}
+
+p{
+    font: 1.2em "Fira Sans", sans-serif;
+    color: white;
+}
+
+
+
+/* CSS for Nav Bar */
+img{
+    
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font: 1.2em "Fira Sans", sans-serif;
+    border-radius: 10px;
+  }
+  
+  li a:hover {
+    background-color: white;
+    color: black;
+  }
+
+  /* CSS for Information */
+
+  #interaction{
+      display: flex;
+      flex-direction: row;
+  }
+
+  #renseignement{
+      display: flex;
+      flex-direction: column;
+      
+  }
+
+  input[type=text] {
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: #333;
+    color: white;
+    font: 1.2em "Fira Sans", sans-serif;
+  }
+
+  label{
+      color: white;
+      font: 1.2em "Fira Sans", sans-serif;
+  }
+
+
+  /* CSS for submit Button */
+  #ok{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+
+  #validation{
+    width: 270px;
+    height: 80px;
+    border: none;
+    border-radius: 40px;
+    text-align: center;
+    background-color: #4B8B3B;
+    color: white;
+    font: 1.2em "Fira Sans", sans-serif;
+  }
+
+  #validation:hover{
+      background-color: #B9D770;
+      color:black;
+  }
+
+
+  #element{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+  
