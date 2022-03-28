@@ -32,11 +32,12 @@ Vue.component('app', {
         },
         
         setId: function(idplaylist){
-            this.styleMusic=idplaylist
+            this.styleMusic=idplaylist.playlists.items[0].id
             console.log(this.styleMusic);
         },
 
         creation: function(){
+            useSpotifyApi.createPlaylist()
             //créer la playlist
             //récupérer la playlist
             //récupérer les sons de la playlist

@@ -14,20 +14,36 @@ const useSpotifyApi={
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Basic ${Authorization}`,
             },
-            body: "grant_type=refresh_token&refresh_token=BQACDdi71-8GYP_qW4mSTb8-yeU0ikdNBcZ5tHy3pNAE8BtHb313jln9U-VmzygkVH_XnV-QvLnVdEx0T_PTgxCh26HW-BbBJkbFJ3T_yaUr1KoT473l7B8dSCtznsW70zx4xm8ShAg05MMI5MZhM9u2s2SLe1TsCXW7ugvLBi7rG47PB1FYg0zz-vcGD4wj--c"
+            body:"grant_type=client_credentials"//refresh_token&refresh_token=BQBPBWWMZpV4nvLgCFelQu0cZ0YdssM9f7aIaeZ8wC-gS_JBHwwfGscl8TPruK5FBKTw-3hAn1V2OgIX4Wkh3Zg84RgRDU6FU3yieOZcjxRnG-Q5kGqlHFgMJxlzKsFyXHxivzCK7iHzSXe8U97syNQdewDy9lfhmXsLBtWKazTbPUWjg0zCORnd1tjzjk0QmF8"
         }).then(response => response.json())
         .then(data=> resolve(data.access_token))
     }),
 
+    getUserId:()=> new Promise((resolve, reject)=>{
+        useSpotifyApi.getToken().then(token=>{
+            let baseUrlGetUserId=`https://api.spotify.com/v1/me`
+            fetch(baseUrlGetUserId,{
+                headers : { 'Authorization':`Bearer ${token}`}
+            })
+            .then((response) => response.json())
+            .then(data => resolve(data.id))
+            .catch(error => reject(error));
+        })
+    }),
+
     createPlaylist: ()=> new Promise((resolve, reject)=>{
         //Create our new playlist
-        let baseUrlNewPlaylist= `https://api.spotify.com/v1/users/${clientId}/playlists`
-        fetch(baseUrlNewPlaylist,useSpotifyApi.getToken())
-        .then((response)=>{
-            let res=response.json();
-            resolve(res)
+        useSpotifyApi.getToken().then(token =>{
+            useSpotifyApi.getUserId().then(id=>{
+                let baseUrlNewPlaylist= `https://api.spotify.com/v1/users/${id}/playlists`
+                fetch(baseUrlNewPlaylist,{
+                    headers : { 'Authorization':`Bearer ${token}`}
+                })
+                .then((response) => response.json())
+                .then(data => resolve(data))
+                .catch(error => reject(error));
+            })
         })
-        .catch(error=>reject(error))
     }),
 
     search: (categorie)=> new Promise((resolve, reject)=>{
