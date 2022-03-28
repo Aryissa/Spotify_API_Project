@@ -7,6 +7,8 @@ Vue.component('chemin',{
                     <br/>
                     <label for="arrivee">Arrivée: </label>
                     <input type="text" name="arrivee" id="arrivee" placeholder="ex :Toulon" v-model="arriver"/>
+                    <br/>
+                    <input type="submit" value="Création itinéraire" @click="getItineraire()">
                 </div>`,
     data: function(){
         return{
@@ -16,12 +18,26 @@ Vue.component('chemin',{
     },
     methods:{
         getItineraire: async function(){
-            let coordDep= await useMapApi.getCoord(this.arriver);
-            let coordArr =await useMapApi.getCoord(this.depart);
+            
+            //DEPART
+            let coordDepart= await useMapApi.getCoord(this.depart);
 
-            let itineraire= await useMapApi.getTime(coordDep, coordArr);
-            this.$emit('an-event',itineraire)
-            //PROBLEME ON A PAS DE SUBMIT SUR CA
+            let longDepar= coordDepart.features[0].geometry.coordinates[0] 
+            let latDepar= coordDepart.features[0].geometry.coordinates[1]
+            
+
+            //ARRIVER
+            let coordArrive= await useMapApi.getCoord(this.arriver);
+
+            let longArrive= coordArrive.features[0].geometry.coordinates[0]
+            let latArrive= coordArrive.features[0].geometry.coordinates[1]
+            
+
+            //ITINERAIRE
+            let temp= await useMapApi.getTime(latDepar,longDepar,latArrive,longArrive);
+
+            //Transmettre a app
+            this.$emit('an-time',temp.duration)
         }
     }
 })
