@@ -34,15 +34,13 @@ const useSpotifyApi={
     createPlaylist: ()=> new Promise((resolve, reject)=>{
         //Create our new playlist
         useSpotifyApi.getToken().then(token =>{
-            useSpotifyApi.getUserId().then(id=>{
-                let baseUrlNewPlaylist= `https://api.spotify.com/v1/users/${id}/playlists`
+                const baseUrlNewPlaylist= `https://api.spotify.com/v1/users/xh146n6b6b4qpji3a2w4nbl0m/playlists`
                 fetch(baseUrlNewPlaylist,{
                     headers : { 'Authorization':`Bearer ${token}`}
                 })
                 .then((response) => response.json())
                 .then(data => resolve(data))
                 .catch(error => reject(error));
-            })
         })
     }),
 
