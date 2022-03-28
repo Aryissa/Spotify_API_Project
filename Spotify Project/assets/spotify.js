@@ -19,29 +19,28 @@ const useSpotifyApi={
         .then(data=> resolve(data.access_token))
     }),
 
-    getUserId:()=> new Promise((resolve, reject)=>{
-        useSpotifyApi.getToken().then(token=>{
-            let baseUrlGetUserId=`https://api.spotify.com/v1/me`
-            fetch(baseUrlGetUserId,{
-                headers : { 'Authorization':`Bearer ${token}`}
-            })
-            .then((response) => response.json())
-            .then(data => resolve(data.id))
-            .catch(error => reject(error));
-        })
-    }),
-
     createPlaylist: ()=> new Promise((resolve, reject)=>{
         //Create our new playlist
         useSpotifyApi.getToken().then(token =>{
                 const baseUrlNewPlaylist= `https://api.spotify.com/v1/users/xh146n6b6b4qpji3a2w4nbl0m/playlists`
                 fetch(baseUrlNewPlaylist,{
-                    headers : { 'Authorization':`Bearer ${token}`}
+                    method: 'POST',
+                    headers: { 
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    data: {
+                        "name": "Bonjour",
+                        "description": "Playlist generated using singlespotify by Kabir Virji",
+                        "public": true
+                    }
                 })
                 .then((response) => response.json())
                 .then(data => resolve(data))
                 .catch(error => reject(error));
-        })
+                })
+
     }),
 
     search: (categorie)=> new Promise((resolve, reject)=>{
