@@ -55,13 +55,15 @@ const useSpotifyApi={
 
     getPlaylist: (idplaylist)=>new Promise((resolve,reject)=>{
         //get the Playlist for get song and analyse time
-        let baseUrlPlaylist=`https://api.spotify.com/v1/playlists/${idplaylist}`
-        fetch(baseUrlPlaylist,useSpotifyApi.getToken())
-        .then((response)=>{
-            let res=response.json();
-            resolve(res)
+        useSpotifyApi.getToken().then(token =>{
+            let baseUrlPlaylist=`https://api.spotify.com/v1/playlists/${idplaylist}`
+            fetch(baseUrlPlaylist,{
+                headers : { 'Authorization':`Bearer ${token}`}
+            })
+            .then((response) => response.json())
+            .then(data => resolve(data))
+            .catch(error => reject(error));
         })
-        .catch(error=>reject(error))
     }),
 
     getTrackTime: (id)=> new Promise((resolve,reject)=>{

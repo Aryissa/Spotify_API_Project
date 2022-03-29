@@ -37,13 +37,14 @@ Vue.component('app', {
             console.log(this.styleMusic);
         },
 
-        creation: function(){
+        creation: async function(){
             //créer la playlist
             useSpotifyApi.createPlaylist(this.namePlaylist)
             //récupérer la playlist
-            
+            let data = await useSpotifyApi.getPlaylist(this.styleMusic);
+            //let playlistCourante=data.tracks.items
             //récupérer les sons de la playlist
-            
+            console.log(data.tracks.items);
             //vérifier temps des sons
 
             //ajouter sons
