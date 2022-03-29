@@ -11,7 +11,7 @@ Vue.component('app', {
                         <stylee @an-style="setId($event)">     </stylee>
                         <br/>
                         <label for="style">Nom de la playlist</label>
-                        <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage"/>
+                        <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
                     </div>
                     <div id="ok" class="col">
                         <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
@@ -23,6 +23,7 @@ Vue.component('app', {
         return{
             dureeItineraire:0,
             styleMusic:"",
+            namePlaylist:"",
         }
     },
     methods:{
@@ -37,11 +38,14 @@ Vue.component('app', {
         },
 
         creation: function(){
-            useSpotifyApi.createPlaylist()
             //créer la playlist
+            useSpotifyApi.createPlaylist(this.namePlaylist)
             //récupérer la playlist
+            
             //récupérer les sons de la playlist
+            
             //vérifier temps des sons
+
             //ajouter sons
 
         }
