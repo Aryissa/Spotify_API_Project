@@ -6,7 +6,7 @@ Vue.component('stylee',{
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input type="text" id="autocomplete-input" class="autocomplete">
+                                    <input type="text" v-model="style" v-on:change="choiceStyle" id="autocomplete-input" class="autocomplete">
                                     <label for="autocomplete-input">Catégories de Musique</label>
                                 </div>
                             </div>
@@ -15,7 +15,7 @@ Vue.component('stylee',{
                 </div>`,
     data: function(){
         return{
-            
+            style : ""
         }
     },
     methods: {
