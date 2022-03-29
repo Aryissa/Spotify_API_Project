@@ -3,19 +3,25 @@ import useMapApi from "../map.js";
 
 Vue.component('app', {
     name: 'app',
-    template: ` <div id="interaction" class="row align-items-start">
-                    <div class="col">
-                    </div>
-                    <div id="renseignement" class="col"  >
-                        <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
-                        <br/>
-                        <stylee @an-style="setId($event)">     </stylee>
-                        <br/>
-                        <label for="style">Nom de la playlist</label>
-                        <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
-                    </div>
-                    <div id="ok" class="col">
-                        <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
+    template: ` <div>
+                    <div class="row align-items-start"></div>
+                    <div id="interaction" class="row align-items-center">
+                        <div class="col">
+                        </div>
+                        <div id="renseignement" class="col"  >
+                            <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
+                            <br/>
+                            <stylee @an-style="setId($event)">     </stylee>
+                            <br/>
+                            <label for="style">Nom de la playlist</label>
+                            <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
+                        </div>
+                        <div id="ok" class="col">
+                            <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
+                        </div>
+                        <div class="row">
+                            <playlists :imgSrcp=imgSrc   :titlep=title></playlists>
+                        </div>
                     </div>
                 </div>`,
     data: function(){
@@ -25,7 +31,9 @@ Vue.component('app', {
             namePlaylist:"",
             depart : "",
             arriver : "",
-            genre : ""
+            genre : "",
+            imgSrc: "",
+            title: ""
         }
     },
     methods:{
@@ -73,23 +81,28 @@ Vue.component('app', {
 
                 //créer la playlist
                 let newPlaylist=await useSpotifyApi.createPlaylist(this.namePlaylist);
-                console.log(newPlaylist);
+                //console.log("Bonhour",newPlaylist);
                 //récupérer la playlist
                 let data = await useSpotifyApi.getPlaylist(this.styleMusic);
-                console.log(data);
                 //récupérer les sons de la playlist
                 let songs=data.tracks.items;
-                console.log(songs);
                 let timeNewPlaylist=0;
-                let nbSong=0;
+
+                let idNewPlaylist=newPlaylist.id
+
                 songs.forEach(element => {
                     //element est le track courrant
                     if(timeNewPlaylist<temp.duration){
                         timeNewPlaylist += (element.track.duration_ms/60000);
+                        console.log(timeNewPlaylist);
                         //console.log(timeNewPlaylist);
                         useSpotifyApi.addMusic("spotify:track:"+element.track.id,newPlaylist.id);
                     }
                 });
+                let getplaylist=await useSpotifyApi.getPlaylist(idNewPlaylist)
+                console.log(getplaylist);
+                this.imgSrc=getplaylist.images[0].url
+                this.title=getplaylist.name
 
             } 
 
