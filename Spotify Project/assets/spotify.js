@@ -78,7 +78,18 @@ const useSpotifyApi={
             .then(data => resolve(data))
             .catch(error => reject(error));
         })
-    })
+    }),
+
+    getGenres : async () => {
+        let token = await useSpotifyApi.getToken();
+        const result  = await fetch(`https://api.spotify.com/v1/browse/categories?country=FR&limit=20`, {
+            method : 'GET',
+            headers : { 'Authorization':`Bearer ${token}`}
+        });
+
+        const data = await result.json();
+        return data.categories.items;
+    },
 }
 
 export default useSpotifyApi
