@@ -29,7 +29,6 @@ Vue.component('stylee',{
 
         
         var elems = document.getElementById('stylee').querySelector('.autocomplete');
-        console.log(elems);
 
         const donnee = {};
         const genres = (await useSpotifyApi.getGenres()).map(element => { donnee[element.name] = null });
