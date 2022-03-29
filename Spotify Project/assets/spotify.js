@@ -66,25 +66,18 @@ const useSpotifyApi={
         })
     }),
 
-    getTrackTime: (id)=> new Promise((resolve,reject)=>{
-        // get the time of the track 
-        let baseUrlGetTime=`https://api.spotify.com/v1/audio-analysis/${id}`
-        fetch(baseUrlGetTime,useSpotifyApi.getToken())
-        .then((response)=>{
-            let res=response.json();
-            resolve(res)
-        })
-        .catch(error=>reject(error))
-    }),
 
     addMusic: (idTrack,idplaylist)=> new Promise((resolve,reject)=>{
-        let baseUrlAddMusic=`https://api.spotify.com/v1/playlists/${idplaylist}/tracks?uris=${idTrack}`
-        fetch(baseUrlAddMusic,useSpotifyApi.getToken())
-        .then((response)=>{
-            let res=response.json();
-            resolve(res)
+        useSpotifyApi.getToken().then(token =>{
+            let baseUrlAddMusic=`https://api.spotify.com/v1/playlists/${idplaylist}/tracks?uris=${idTrack}`
+            fetch(baseUrlAddMusic,{
+                method:"POST",
+                headers : { 'Authorization':`Bearer ${token}`}
+            })
+            .then((response) => response.json())
+            .then(data => resolve(data))
+            .catch(error => reject(error));
         })
-        .catch(error=>reject(error))
     })
 }
 
