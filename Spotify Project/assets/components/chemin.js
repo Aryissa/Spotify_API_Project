@@ -7,7 +7,7 @@ Vue.component('chemin',{
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input v-model="depart" v-on:change="findDepart()" type="text" id="autocomplete-input" class="autocomplete">
+                                    <input v-model="depart" v-on:change="sendDepart()" @keyup="autoDepart" type="text" id="autocomplete-input" class="autocomplete">
                                     <label for="autocomplete-input">Départ</label>
                                 </div>
                             </div>
@@ -18,7 +18,7 @@ Vue.component('chemin',{
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input v-model="arriver" v-on:change="findArriver()" type="text" id="autocomplete-input" class="autocomplete">
+                                    <input v-model="arriver" v-on:change="sendArriver()" @keyup="autoArriver" type="text" id="autocomplete-input" class="autocomplete">
                                     <label for="autocomplete-input">Arrivé</label>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@ Vue.component('chemin',{
     },
     methods:{
 
-        findDepart : async function() {
+        autoDepart : async function() {
 
             if(this.depart.length > 1) {
                 try {
@@ -46,7 +46,7 @@ Vue.component('chemin',{
 
                     this.departInput.updateData(data);
 
-                    this.$emit('depart', this.depart);
+                    
 
                 } catch(e) {
                     console.log("ville non trouvé");
@@ -55,7 +55,11 @@ Vue.component('chemin',{
             
         },
 
-        findArriver : async function() {
+        sendDepart : async function() {
+            this.$emit('depart', this.depart);
+        },
+
+        autoArriver : async function() {
 
             if(this.arriver.length > 1) {
                 try {
@@ -66,8 +70,6 @@ Vue.component('chemin',{
 
                     this.arriverInput.updateData(data);
 
-                    this.$emit('arriver', this.arriver);
-
                 } catch(e) {
                     console.log("ville non trouvé");
                 }
@@ -75,28 +77,9 @@ Vue.component('chemin',{
             
         },
 
-        // getItineraire: async function(){
-            
-        //     //DEPART
-        //     let coordDepart= await useMapApi.getCoord(this.depart);
-
-        //     let longDepar= coordDepart.features[0].geometry.coordinates[0] 
-        //     let latDepar= coordDepart.features[0].geometry.coordinates[1]
-            
-
-        //     //ARRIVER
-        //     let coordArrive= await useMapApi.getCoord(this.arriver);
-
-        //     let longArrive= coordArrive.features[0].geometry.coordinates[0]
-        //     let latArrive= coordArrive.features[0].geometry.coordinates[1]
-            
-
-        //     //ITINERAIRE
-        //     let temp= await useMapApi.getTime(latDepar,longDepar,latArrive,longArrive);
-
-        //     //Transmettre a app
-        //     this.$emit('an-time',temp.duration)
-        // },
+        sendArriver : async function() {
+            this.$emit('arriver', this.arriver);
+        }
     },
 
     async mounted() {

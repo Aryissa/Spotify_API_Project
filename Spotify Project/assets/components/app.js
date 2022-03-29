@@ -38,18 +38,15 @@ Vue.component('app', {
     },
     methods:{
 
+        // on récupère la ville de départ depuis notre composant chemin
         setDepart : function(depart) {
             this.depart = depart;
             
         },
 
+        // on récupère la ville d'arrivée depuis notre composant chemin
         setArriver : function(arriver) {
             this.arriver = arriver;
-        },
-
-        setTime: function(time){
-            this.dureeItineraire=time
-            console.log(this.dureeItineraire);
         },
         
         setId: async function(idplaylist){
@@ -90,15 +87,13 @@ Vue.component('app', {
 
                 let idNewPlaylist=newPlaylist.id
 
-                songs.forEach(element => {
-                    //element est le track courrant
+                for(const son of songs) {
                     if(timeNewPlaylist<temp.duration){
-                        timeNewPlaylist += (element.track.duration_ms/60000);
-                        console.log(timeNewPlaylist);
-                        //console.log(timeNewPlaylist);
-                        useSpotifyApi.addMusic("spotify:track:"+element.track.id,newPlaylist.id);
+                        timeNewPlaylist += (son.track.duration_ms/60000);
+                        let result = await useSpotifyApi.addMusic("spotify:track:"+son.track.id,newPlaylist.id);
+                        console.log(result);
                     }
-                });
+                }
                 let getplaylist=await useSpotifyApi.getPlaylist(idNewPlaylist)
                 console.log(getplaylist);
                 this.imgSrc=getplaylist.images[0].url
