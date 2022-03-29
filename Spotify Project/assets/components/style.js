@@ -1,12 +1,12 @@
 import useSpotifyApi from "../spotify.js";
 
 Vue.component('stylee',{
-    template:`  <div>
+    template:`  <div id="stylee">
                     <div class="row">
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input type="text" id="autocomplete-input" class="autocomplete" >
+                                    <input type="text" id="autocomplete-input" class="autocomplete">
                                     <label for="autocomplete-input">Catégories de Musique</label>
                                 </div>
                             </div>
@@ -27,7 +27,9 @@ Vue.component('stylee',{
 
     async mounted() {
 
-        var elems = document.querySelectorAll('.autocomplete');
+        
+        var elems = document.getElementById('stylee').querySelector('.autocomplete');
+        console.log(elems);
 
         const donnee = {};
         const genres = (await useSpotifyApi.getGenres()).map(element => { donnee[element.name] = null });

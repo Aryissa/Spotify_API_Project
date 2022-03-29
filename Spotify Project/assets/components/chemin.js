@@ -2,21 +2,41 @@ import useMapApi from "../map.js"
 
 Vue.component('chemin',{
     template: ` <div>
-                    <label for="depart">Départ: </label>
-                    <input type="text" id="depart" name="depart" placeholder="ex: Nantes" v-model="depart"/>
-                    <br/>
-                    <label for="arrivee">Arrivée: </label>
-                    <input type="text" name="arrivee" id="arrivee" placeholder="ex :Toulon" v-model="arriver"/>
-                    <br/>
-                    <input type="submit" value="Création itinéraire" @click="getItineraire()">
+                    <div class="row" id="depart">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input v-model="depart" @keyup="findVille()" type="text" id="autocomplete-input" class="autocomplete">
+                                    <label for="autocomplete-input">Départ</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="arriver">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input v-model="arriver" @keyup="findVille()" type="text" id="autocomplete-input" class="autocomplete">
+                                    <label for="autocomplete-input">Arrivé</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>`,
     data: function(){
         return{
+            message: "",
             depart : "",
             arriver : "",
         }
     },
     methods:{
+
+        findVille : async function() {
+            
+        },
+
         getItineraire: async function(){
             
             //DEPART
@@ -38,6 +58,15 @@ Vue.component('chemin',{
 
             //Transmettre a app
             this.$emit('an-time',temp.duration)
-        }
-    }
+        },
+    },
+
+    async mounted() {
+
+        let departInput = document.getElementById('depart').querySelector('.autocomplete');
+        let arriverInput = document.getElementById('arriver').querySelector('.autocomplete');
+
+    } 
+
+    
 })
