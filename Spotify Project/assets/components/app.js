@@ -32,27 +32,31 @@ Vue.component('app', {
             console.log(this.dureeItineraire);
         },
         
-        setId: function(idplaylist){
+        setId: async function(idplaylist){
             this.styleMusic=idplaylist.playlists.items[0].id
             console.log(this.styleMusic);
+            let data = await useSpotifyApi.getPlaylist(this.styleMusic);
+            console.log(data);
         },
 
         creation: async function(){
             //créer la playlist
-            let newPlaylist=await useSpotifyApi.createPlaylist(this.namePlaylist)
+            let newPlaylist=await useSpotifyApi.createPlaylist(this.namePlaylist);
+            console.log(newPlaylist);
             //récupérer la playlist
             let data = await useSpotifyApi.getPlaylist(this.styleMusic);
-            let newPlaylistId=newPlaylist.id
+            console.log(data);
             //récupérer les sons de la playlist
-            let songs=data.tracks.items
+            let songs=data.tracks.items;
+            console.log(songs);
             let timeNewPlaylist=0;
             let nbSong=0;
             songs.forEach(element => {
                 //element est le track courrant
                 if(timeNewPlaylist<this.dureeItineraire){
-                    timeNewPlaylist=timeNewPlaylist+(element.track.duration_ms/60000)
+                    timeNewPlaylist += (element.track.duration_ms/60000);
                     //console.log(timeNewPlaylist);
-                    useSpotifyApi.addMusic("spotify:track:"+element.track.id,newPlaylistId)
+                    useSpotifyApi.addMusic("spotify:track:"+element.track.id,newPlaylist.id);
                 }
             });
         }
