@@ -23,7 +23,7 @@ Vue.component('app', {
                             <div v-if="playlists.length">
                                 <div v-for="playlist in playlists">
                                     <div v-if="playlist.images[0].url && playlist.name">
-                                        <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name  :url=playlist.id></playlists>
+                                        <playlists class="card text-white bg-secondary mb-3 ":imgSrcp=playlist.images[0].url   :titlep=playlist.name  :url=playlist.id></playlists>
                                     </div>
                                     
                                 </div>
