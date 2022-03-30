@@ -42,7 +42,7 @@ const useSpotifyApi={
 
     getPlaylistsUser: ()=>new Promise((resolve, reject)=>{
         useSpotifyApi.getToken().then(token =>{
-            let baseUrlPlaylist=`https://api.spotify.com/v1/me/playlists?limit=20`
+            let baseUrlPlaylist=`https://api.spotify.com/v1/me/playlists?limit=10`
             fetch(baseUrlPlaylist,{
                 headers : { 'Authorization':`Bearer ${token}`}
             })
