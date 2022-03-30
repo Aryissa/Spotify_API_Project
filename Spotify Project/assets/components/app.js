@@ -19,11 +19,11 @@ Vue.component('app', {
                             </div>
 
                         <div class="col">
-                            <h4 style = "color : white;">Historique des Playlists Créées : </h4>
+                            <h4 style = "color : white;">Historique des Playlists Créées : <a href="" @click=viderHistorique>(vider)</a></h4>
                             <div v-if="playlists.length">
                                 <div v-for="playlist in playlists">
                                     <div v-if="playlist.images[0] != undefined">
-                                        <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name  :url=playlist.id></playlists>
+                                        <playlists class="card text-white bg-secondary mb-3 ":imgSrcp=playlist.images[0].url   :titlep=playlist.name  :url=playlist.id></playlists>
                                     </div>
                                     
                                 </div>
@@ -122,6 +122,11 @@ Vue.component('app', {
             } 
 
             
+        },
+
+        viderHistorique : function() {
+            this.playlists = [];
+            localStorage.clear();
         }
     },
 
