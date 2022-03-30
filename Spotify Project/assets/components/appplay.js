@@ -3,18 +3,11 @@ import useSpotifyApi from "../spotify.js";
 Vue.component('appplay',{
     template:`  <div>
                     <input type="submit"  @click="getlist()">
-                    <div class="container">
-                        <div v-for="playlist in playlists">
-                            <div v-if="playlist.images[0].url && playlist.name">
-                                <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
-                            </div>
-                            
+                    <div v-for="playlist in listPlaylist">
+                        <div v-if="playlist.images[0] != undefined">
+                            <playlists class="card" :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
                         </div>
-
-                        <div class="row">
-                            <playlists  class="col" v-for= "playlist in listPlaylist"       :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
-                        </div>   
-                    </div>    
+                    </div>
                 </div>`,
     data: function(){
         return{

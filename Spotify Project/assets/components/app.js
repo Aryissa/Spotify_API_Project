@@ -5,30 +5,31 @@ Vue.component('app', {
     name: 'app',
     template: ` <div>
                     <div class="row align-items-start"></div>
-                    <div id="interaction" class="row align-items-center">
-                        <div class="col">
-                        </div>
+                    <div id="interaction" class="row align-items-top">
                         <div id="renseignement" class="col"  >
-                            <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
-                            <br/>
-                            <stylee @an-style="setId($event)">     </stylee>
-                            <br/>
-                            <label for="style">Nom de la playlist</label>
-                            <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
-                        </div>
-                        <div id="ok" class="col">
-                            <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
-                        </div>
-                        <iframe src="https://open.spotify.com/embed/album/:actualURL" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        <h4 style = "color : white;">Historique des Playlists Créées : </h4>
-                        <div v-if="playlists.length">
-                            <div v-for="playlist in playlists">
-                                <div v-if="playlist.images[0].url && playlist.name">
-                                    <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name @click="afficherLecteur()" ></playlists>
+                                <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
+                                <br/>
+                                <stylee @an-style="setId($event)">     </stylee>
+                                <br/>
+                                <label for="style">Nom de la playlist</label>
+                                <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
+                                <div class="row">
+                                    <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
                                 </div>
-                                
+                            </div>
+
+                        <div class="col">
+                            <h4 style = "color : white;">Historique des Playlists Créées : </h4>
+                            <div v-if="playlists.length">
+                                <div v-for="playlist in playlists">
+                                    <div v-if="playlist.images[0].url && playlist.name">
+                                        <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>`,
     data: function(){
@@ -120,10 +121,6 @@ Vue.component('app', {
                 console.log(localStorage.getItem('historique'));
             } 
 
-            
-        },
-
-        afficherLecteur : function() {
             
         }
     },
