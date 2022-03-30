@@ -10,7 +10,7 @@ Vue.component('playlists',{
 
                         <div class="col">
                         <p>{{titlep}}</p>
-                        <iframe v-bind:src=test width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe v-bind:src=test width="100%" height="80%" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                         </div>
                     </div>    
                     
