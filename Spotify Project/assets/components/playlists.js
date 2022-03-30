@@ -7,7 +7,7 @@ Vue.component('playlists',{
                     <div class="col">
                             <img class="img-fluid card-img-top" v-bind:src=imgSrcp>
                             <br/>
-                            <p class="card-title center" style="color: black !important"> {{titlep}} </p>
+                            <p class="card-title center"> {{titlep}} </p>
                         </div>
                     </div>    
                 </div>`,
