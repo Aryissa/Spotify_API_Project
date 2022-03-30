@@ -4,7 +4,7 @@ Vue.component('appplay',{
     template:`  <div>
                     <div class="container">
                         <div class="row justify-content-center">
-                            <div v-for="playlist in listPlaylist"  v-if="playlist.images[0] != undefined" class="col-2">            
+                            <div v-for="playlist in listPlaylist"  v-if="playlist.images[0] != undefined" class="col-5">            
                                 <playlists class="card" :imgSrcp=playlist.images[0].url   :titlep=playlist.name :url=playlist.id ></playlists>
                             </div>
                         </div>
