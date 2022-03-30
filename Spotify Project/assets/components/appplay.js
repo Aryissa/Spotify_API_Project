@@ -21,6 +21,5 @@ Vue.component('appplay',{
     async mounted() {
         let list=await useSpotifyApi.getPlaylistsUser();
         this.listPlaylist=list.items
-        var elems = document.getElementById('appplay').querySelector('.container');
     }
 })
