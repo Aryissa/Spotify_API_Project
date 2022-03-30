@@ -22,7 +22,7 @@ Vue.component('app', {
                             <h4 style = "color : white;">Historique des Playlists Créées : </h4>
                             <div v-if="playlists.length">
                                 <div v-for="playlist in playlists">
-                                    <div v-if="playlist.images[0].url && playlist.name">
+                                    <div v-if="playlist.images[0] != undefined">
                                         <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name  :url=playlist.id></playlists>
                                     </div>
                                     
@@ -114,7 +114,7 @@ Vue.component('app', {
                 }
                 let getplaylist=await useSpotifyApi.getPlaylist(idNewPlaylist)
                 console.log(getplaylist);
-                this.playlists.push(getplaylist);
+                this.playlists.unshift(getplaylist);
                 console.log(this.playlists);
                 
                 localStorage.setItem('historique', JSON.stringify(this.playlists));
