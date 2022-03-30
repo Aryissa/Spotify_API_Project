@@ -4,7 +4,7 @@ Vue.component('playlists',{
     props: ['imgSrcp','titlep'],
     template: ` <div class="container">    
                     <div class="col">
-                        <img class="img-fluid" v-bind:src=imgSrcp>
+                        <img class="img-fluid" v-bind:src=imgSrcp >
                         <br/>
                         <p class="center"><strong> {{titlep}} </strong></p>
                     </div>

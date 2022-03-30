@@ -19,7 +19,7 @@ Vue.component('app', {
                         <div id="ok" class="col">
                             <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
                         </div>
-                        <h4 style = "color : white;">Playlists Créées : </h4>
+                        <h4 style = "color : white;">Historique des Playlists Créées : </h4>
                         <div v-if="playlists.length">
                             <div v-for="playlist in playlists">
                                 <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
