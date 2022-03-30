@@ -19,10 +19,14 @@ Vue.component('app', {
                         <div id="ok" class="col">
                             <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
                         </div>
+                        <iframe src="https://open.spotify.com/embed/album/:actualURL" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                         <h4 style = "color : white;">Historique des Playlists Créées : </h4>
                         <div v-if="playlists.length">
                             <div v-for="playlist in playlists">
-                                <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
+                                <div v-if="playlist.images[0].url && playlist.name">
+                                    <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name @click="afficherLecteur()" ></playlists>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -35,7 +39,8 @@ Vue.component('app', {
             depart : "",
             arriver : "",
             genre : "",
-            playlists : []
+            playlists : [],
+            actualURL : "1DFixLWuPkv3KT3TnV35m3"
         }
     },
     methods:{
@@ -89,6 +94,16 @@ Vue.component('app', {
 
                 let idNewPlaylist=newPlaylist.id
 
+                for(let i = 0; i < songs.length; i++) {
+                    let r1 = Math.floor(Math.random() * songs.length);
+                    console.log(r1)
+                    let r2 = Math.floor(Math.random() * songs.length);
+                    console.log(r2)
+                    let temp = songs[r1];
+                    songs[r1] = songs[r2];
+                    songs[r2] = temp;
+                }
+
                 for(const son of songs) {
                     if(timeNewPlaylist<temp.duration){
                         timeNewPlaylist += (son.track.duration_ms/60000);
@@ -105,6 +120,10 @@ Vue.component('app', {
                 console.log(localStorage.getItem('historique'));
             } 
 
+            
+        },
+
+        afficherLecteur : function() {
             
         }
     },

@@ -40,6 +40,18 @@ const useSpotifyApi={
 
     }),
 
+    getPlaylistsUser: ()=>new Promise((resolve, reject)=>{
+        useSpotifyApi.getToken().then(token =>{
+            let baseUrlPlaylist=`https://api.spotify.com/v1/me/playlists?limit=20`
+            fetch(baseUrlPlaylist,{
+                headers : { 'Authorization':`Bearer ${token}`}
+            })
+            .then((response) => response.json())
+            .then(data => resolve(data))
+            .catch(error => reject(error));
+        })
+    }),
+
     search: (categorie)=> new Promise((resolve, reject)=>{
         //search the playlist by categorie
         useSpotifyApi.getToken().then(token =>{
