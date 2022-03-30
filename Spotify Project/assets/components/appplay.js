@@ -2,10 +2,11 @@ import useSpotifyApi from "../spotify.js";
 
 Vue.component('appplay',{
     template:`  <div>
-                    <input type="submit"  @click="getlist()">
-                    <div v-for="playlist in listPlaylist">
-                        <div v-if="playlist.images[0] != undefined">
-                            <playlists class="card" :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div v-for="playlist in listPlaylist"  v-if="playlist.images[0] != undefined" class="col-2">            
+                                <playlists class="card" :imgSrcp=playlist.images[0].url   :titlep=playlist.name  ></playlists>
+                            </div>
                         </div>
                     </div>
                 </div>`,
@@ -15,10 +16,11 @@ Vue.component('appplay',{
         }
     },
     methods: {
-        getlist: async function(){
-            let list=await useSpotifyApi.getPlaylistsUser();
-            this.listPlaylist=list.items
-            console.log(list.items);
-        }
+        
+    },
+    async mounted() {
+        let list=await useSpotifyApi.getPlaylistsUser();
+        this.listPlaylist=list.items
+        var elems = document.getElementById('appplay').querySelector('.container');
     }
 })
