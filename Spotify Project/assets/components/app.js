@@ -5,18 +5,19 @@ Vue.component('app', {
     name: 'app',
     template: ` <div>
                     <div class="row align-items-start"></div>
-                    <div id="interaction" class="row align-items-top">
-                        <div id="renseignement" class="col"  >
-                                <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
-                                <br/>
-                                <stylee @an-style="setId($event)">     </stylee>
-                                <br/>
-                                <label for="style">Nom de la playlist</label>
-                                <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
-                                <div class="row">
-                                    <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
+                        <div class="container">
+                            <div id="interaction" class="row justify-content-center">
+                                <div id="renseignement" class="col"  >
+                                    <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
+                                    <br/>
+                                    <stylee @an-style="setId($event)">     </stylee>
+                                    <br/>
+                                    <label for="style">Nom de la playlist</label>
+                                    <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
+                                    <div class="row">
+                                        <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
+                                    </div>
                                 </div>
-                            </div>
 
                         <div class="col">
                             <h4 style = "color : white;">Historique des Playlists Créées : <a href="" @click=viderHistorique>(vider)</a></h4>
@@ -26,10 +27,11 @@ Vue.component('app', {
                                         <playlists class="card text-white bg-secondary mb-3 ":imgSrcp=playlist.images[0].url   :titlep=playlist.name  :url=playlist.id></playlists>
                                     </div>
                                     
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         
+                        </div>
                     </div>
                 </div>`,
     data: function(){
