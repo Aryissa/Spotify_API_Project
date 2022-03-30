@@ -5,22 +5,21 @@ Vue.component('app', {
     name: 'app',
     template: ` <div>
                     <div class="row align-items-start"></div>
-                    <div id="interaction" class="row align-items-center">
-                        <div class="col">
-                        </div>
-                        <div id="renseignement" class="col"  >
-                            <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
-                            <br/>
-                            <stylee @an-style="setId($event)">     </stylee>
-                            <br/>
-                            <label for="style">Nom de la playlist</label>
-                            <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
-                        </div>
-                        <div id="ok" class="col">
-                            <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
-                        </div>
-                        <div class="row">
-                            <playlists :imgSrcp=imgSrc   :titlep=title></playlists>
+                        <div id="interaction" class="row align-items-center">
+                            <div id="renseignement" class="col"  >
+                                <chemin @depart="setDepart($event)"  @arriver="setArriver($event)">    </chemin>
+                                <br/>
+                                <stylee @an-style="setId($event)">     </stylee>
+                                <br/>
+                                <label for="style">Nom de la playlist</label>
+                                <input type="text" name="nom" id="nom" placeholder="ex: Voyage plage" v-model="namePlaylist"/>
+                                <div class="row">
+                                    <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <playlists :imgSrcp=imgSrc   :titlep=title></playlists>
+                            </div>
                         </div>
                     </div>
                 </div>`,

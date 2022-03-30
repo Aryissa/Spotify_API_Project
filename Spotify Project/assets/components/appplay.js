@@ -5,7 +5,7 @@ Vue.component('appplay',{
                     <input type="submit"  @click="getlist()">
                     <div v-for="playlist in listPlaylist">
                         <div v-if="playlist.images[0] != undefined">
-                            <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
+                            <playlists class="card" :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
                         </div>
                     </div>
                 </div>`,
