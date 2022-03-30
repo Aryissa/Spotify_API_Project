@@ -19,8 +19,11 @@ Vue.component('app', {
                         <div id="ok" class="col">
                             <input type="submit" value="Création" id="validation" class="btn btn-secondary btn-lg" @click="creation()">
                         </div>
-                        <div class="row">
-                            <playlists :imgSrcp=imgSrc   :titlep=title></playlists>
+                        <h4 style = "color : white;">Playlists Créées : </h4>
+                        <div v-if="playlists.length">
+                            <div v-for="playlist in playlists">
+                                <playlists :imgSrcp=playlist.images[0].url   :titlep=playlist.name></playlists>
+                            </div>
                         </div>
                     </div>
                 </div>`,
@@ -32,8 +35,7 @@ Vue.component('app', {
             depart : "",
             arriver : "",
             genre : "",
-            imgSrc: "",
-            title: ""
+            playlists : []
         }
     },
     methods:{
@@ -96,13 +98,21 @@ Vue.component('app', {
                 }
                 let getplaylist=await useSpotifyApi.getPlaylist(idNewPlaylist)
                 console.log(getplaylist);
-                this.imgSrc=getplaylist.images[0].url
-                this.title=getplaylist.name
-
+                this.playlists.push(getplaylist);
+                console.log(this.playlists);
+                
+                localStorage.setItem('historique', JSON.stringify(this.playlists));
+                console.log(localStorage.getItem('historique'));
             } 
 
             
         }
+    },
+
+    mounted : async function() {
+        if(localStorage.getItem('historique') != null) {
+            this.playlists = JSON.parse(localStorage.getItem('historique'))
+        } 
     }
 
 })
