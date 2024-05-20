@@ -1,7 +1,7 @@
 const useMapApi={
 
     getCoord: (ville)=>new Promise((resolve,reject)=>{
-        const BaseUrlCoord=`https://geocodage.ign.fr/look4/poi/search?q=${ville}`
+        const BaseUrlCoord=`https://data.geopf.fr/geocodage/search?q=${ville}&limit=1&returntruegeometry=false`
         fetch(BaseUrlCoord).
         then((response)=>{
             let res=response.json();
